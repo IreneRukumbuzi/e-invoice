@@ -27,7 +27,7 @@ public class InvoiceService {
 
     List<Invoice> invoices = new ArrayList<>();
 
-    invoices = invoiceRepo.findAllByCreatorId(customerId);
+    invoices = invoiceRepo.findAll();
 
     return invoices;
   }
