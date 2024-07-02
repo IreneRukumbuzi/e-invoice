@@ -1,5 +1,10 @@
 package com.qt.e_invoice.entity;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,15 +23,14 @@ public class Invoice {
     private long id;
 
     @Column(nullable = false)
-    private String amount;
+    private long customerId;
 
     @Column(nullable = false)
-    private String invoiceDate;
+    private String amount;
 
     @Column(nullable = false)
     private String status;
 
-    @ManyToOne
-    @JoinColumn(name="customerId", nullable=false)
-    private Customer creator;
+    @Column(nullable = false)
+    private String invoiceDate;
 }

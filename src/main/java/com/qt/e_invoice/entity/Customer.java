@@ -1,6 +1,5 @@
 package com.qt.e_invoice.entity;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -18,7 +17,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,7 +45,7 @@ public class Customer implements UserDetails {
         return email;
     }
 
-    @OneToMany(cascade = CascadeType.ALL, fetch= FetchType.LAZY)
-    @JoinColumn(name = "customerId", referencedColumnName="id")
-    private List<Invoice> appointmentList = new ArrayList<Invoice>();;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "customerId")
+    private List<Invoice> invoices;
 }
