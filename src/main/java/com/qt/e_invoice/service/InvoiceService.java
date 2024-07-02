@@ -2,6 +2,7 @@ package com.qt.e_invoice.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -49,12 +50,14 @@ public class InvoiceService {
 
   public Invoice updateInvoice(Invoice invoice, long id) {
     Invoice updatedInvoice = new Invoice();
-    boolean isInvoiceAvailable = invoiceRepo.existsById(id);
 
-    if (isInvoiceAvailable) {
+    Optional<Invoice> availableInvoice = invoiceRepo.findById(id);
+
+    if (availableInvoice.isPresent()) {
       updatedInvoice.setAmount(invoice.getAmount());
       updatedInvoice.setStatus(invoice.getStatus());
       updatedInvoice.setInvoiceDate(invoice.getInvoiceDate());
+      updatedInvoice.setCustomerId(getCustomerId());
       invoiceRepo.save(updatedInvoice);
     }
 
