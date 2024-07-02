@@ -47,8 +47,15 @@ The E-invoice Application is a Spring Boot Application designed to manage users 
     ```bash
     ./mvnw spring-boot:run
     ```
+    
 
 ## Usage
 1. Open Postman or insomnia and Add the baseurl in the env `http://localhost:8080`.
 2. To access the auth endpoints, add ```/auth/register``` for signup and ```/auth/login``` for login
 3. To access the invoices endpoints, add ```/invoices```, use these methods: ```GET``` to get all, ```POST``` to create an invoice, ```DELETE``` to delete an invoice and ```PUT``` to update, remember to provide the token in the Authorization paramater like this: ```bearer ${token}```
+
+
+### Database Schema
+
+<img width="787" alt="Database Schema" src="https://github.com/IreneRukumbuzi/e-invoice/assets/68101724/6fffb001-9056-4dc5-96bc-d35c1a6084ad">
+
