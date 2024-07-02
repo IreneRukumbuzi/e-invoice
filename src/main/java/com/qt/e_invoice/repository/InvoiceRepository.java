@@ -9,5 +9,5 @@ import com.qt.e_invoice.entity.Invoice;
 
 @Repository
 public interface InvoiceRepository extends JpaRepository<Invoice, Long> {
-  List<Invoice> findByCustomerId(Long customerId);
+  List<Invoice> findByCustomerId(long customerId);
 }

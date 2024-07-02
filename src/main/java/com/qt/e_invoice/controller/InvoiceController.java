@@ -23,4 +23,14 @@ public class InvoiceController {
     public Invoice saveInvoice(@RequestBody Invoice invoice){
         return invoiceService.saveInvoice(invoice);
     }
+
+    @PutMapping("/{invoiceId}")
+    public Invoice updateInvoice(@RequestBody Invoice invoice, @PathVariable("invoiceId") long invoiceId) {
+        return invoiceService.updateInvoice(invoice, invoiceId);
+    }
+
+    @DeleteMapping("/{invoiceId}")
+    public void deleteInvoice(@PathVariable("invoiceId") long invoiceId){
+       invoiceService.deleteInvoice(invoiceId);
+    }
 }
