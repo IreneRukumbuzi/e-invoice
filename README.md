@@ -1,12 +1,12 @@
 # E-Invoice
 
 ## Overview
-The E-invoice Application is a web-based platform designed to manage user invoices. The application allows users to sign up, log in, and be able to create, read, edit and delete invoices.
+The E-invoice Application is a Spring Boot Application designed to manage users and invoices. The application allows users to sign up, log in, and be able to create, view, edit and delete their invoices.
 
 ## Features
 - **User Registration**: Allows new users to create an account.
 - **User Login**: Enables existing users to log in to the application.
-- **Invoices Management**: Users can view and update their invoices.
+- **Invoices Management**: Users can create, view, update and delete their invoices.
 - **Authentication**: Secure login and registration using JWT (JSON Web Tokens).
 
 ## Technologies Used
@@ -49,6 +49,6 @@ The E-invoice Application is a web-based platform designed to manage user invoic
     ```
 
 ## Usage
-1. Open your web browser and navigate to `http://localhost:8080`.
+1. Open Postman or insomnia and Add the baseurl in the env `http://localhost:8080`.
 2. To access the auth endpoints, add ```/auth/register``` for signup and ```/auth/login``` for login
 3. To access the invoices endpoints, add ```/invoices```, use these methods: ```GET``` to get all, ```POST``` to create an invoice, ```DELETE``` to delete an invoice and ```PUT``` to update, remember to provide the token in the Authorization paramater like this: ```bearer ${token}```
