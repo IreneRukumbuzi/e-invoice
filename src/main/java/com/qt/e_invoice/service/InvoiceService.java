@@ -91,6 +91,43 @@ public class InvoiceService {
     return response;
   }
 
+  public InvoiceDto updateInvoice(long id, InvoiceDto invoice) {
+    InvoiceDto response = new InvoiceDto();
+    try {
+      long customerId = jwtUtils.getCustomerId();
+      Optional<Invoice> savedInvoice = invoiceRepo.findByIdAndCustomerId(id, customerId);
+
+      if (savedInvoice.isPresent()) {
+        Invoice newInvoice = savedInvoice.get();
+
+        if (invoice.getAmount() != null) {
+          newInvoice.setAmount(invoice.getAmount());
+        }
+        if (invoice.getInvoiceDate() != null) {
+          newInvoice.setInvoiceDate(invoice.getInvoiceDate());
+        }
+        if (invoice.getStatus() != null) {
+          newInvoice.setStatus(invoice.getStatus());
+        }
+
+        Invoice updatedInvoice = invoiceRepo.save(newInvoice);
+
+        response.setInvoice(updatedInvoice);
+        response.setStatusCode(HttpStatus.OK);
+        response.setMessage("Invoice updated successfully");
+
+        rabbitMQProducer.sendInvoiceNotification("Invoice updated: " + updatedInvoice.getId());
+      } else {
+        response.setStatusCode(HttpStatus.NOT_FOUND);
+        response.setMessage("Invoice not found");
+      }
+    } catch (Exception e) {
+      response.setStatusCode(HttpStatus.BAD_REQUEST);
+      response.setMessage("Error occurred while updating invoice: " + e.getMessage());
+    }
+    return response;
+  }
+
   public InvoiceDto deleteInvoice(long id) {
     InvoiceDto response = new InvoiceDto();
     try {

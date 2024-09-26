@@ -32,6 +32,12 @@ public class InvoiceController {
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
+    @PatchMapping("/{id}")
+    public ResponseEntity<InvoiceDto> updateInvoice(@PathVariable long id, @RequestBody InvoiceDto invoice) {
+        InvoiceDto response = invoiceService.updateInvoice(id, invoice);
+        return ResponseEntity.status(response.getStatusCode()).body(response);
+    }
+
     @DeleteMapping("/{id}")
     public ResponseEntity<InvoiceDto> deleteInvoice(@PathVariable long id) {
         InvoiceDto response = invoiceService.deleteInvoice(id);
