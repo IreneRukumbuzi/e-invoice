@@ -8,7 +8,10 @@ import org.springframework.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.qt.e_invoice.entity.Invoice;
+import com.qt.e_invoice.entity.InvoiceStatus;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Data;
 
 @Data
@@ -20,7 +23,8 @@ public class InvoiceDto {
     private String message;
 
     private String amount;
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private InvoiceStatus status;
     private LocalDateTime invoiceDate;
 
     private Invoice invoice;

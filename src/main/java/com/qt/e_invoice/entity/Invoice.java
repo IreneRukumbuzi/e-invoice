@@ -26,7 +26,7 @@ public class Invoice {
     private String amount;
 
     @Column(nullable = false)
-    private String status;
+    private InvoiceStatus status;
 
     @Column(nullable = false)
     private LocalDateTime invoiceDate;
