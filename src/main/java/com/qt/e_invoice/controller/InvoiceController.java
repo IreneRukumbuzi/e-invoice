@@ -14,13 +14,13 @@ public class InvoiceController {
     @Autowired
     private InvoiceService invoiceService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<InvoiceDto> createInvoice(@RequestBody InvoiceDto invoice) {
         InvoiceDto response = invoiceService.saveInvoice(invoice);
         return ResponseEntity.status(response.getStatusCode()).body(response);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<InvoiceDto> getInvoices() {
         InvoiceDto response = invoiceService.getAllInvoices();
         return ResponseEntity.status(response.getStatusCode()).body(response);
