@@ -24,7 +24,7 @@ The E-invoice Application is a Spring Boot Application designed to manage users 
 
 ## Prerequisites
 
-- Java JDK 11 or higher
+- Java JDK 17
 - PostgreSQL
 
 ## Getting Started
