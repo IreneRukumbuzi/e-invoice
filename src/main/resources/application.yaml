@@ -1,4 +1,4 @@
-server: 
+server:
   port: 8080
 spring:
   application:
@@ -9,15 +9,13 @@ spring:
     password: ${DATABASE_PASSWORD}
   jpa:
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
-        format_sql: true
-  spring:
-    rabbitmq:
-      host: localhost
-      port: 5672
-      username: guest
-      password: guest
-
+        "[format_sql]": true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest

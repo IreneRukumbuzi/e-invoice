@@ -1,7 +1,8 @@
 package com.qt.e_invoice.config;
 
-import com.qt.e_invoice.service.JWTUtils;
 import com.qt.e_invoice.service.CustomerDetailsService;
+import com.qt.e_invoice.utils.JWTUtils;
+
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

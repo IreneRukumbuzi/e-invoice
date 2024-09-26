@@ -1,5 +1,7 @@
 package com.qt.e_invoice.entity;
 
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -27,5 +29,5 @@ public class Invoice {
     private String status;
 
     @Column(nullable = false)
-    private String invoiceDate;
+    private LocalDateTime invoiceDate;
 }

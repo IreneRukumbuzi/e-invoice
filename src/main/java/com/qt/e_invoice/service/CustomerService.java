@@ -1,9 +1,12 @@
 package com.qt.e_invoice.service;
 
-import com.qt.e_invoice.dto.ReqRes;
+import com.qt.e_invoice.dto.CustomerDto;
 import com.qt.e_invoice.entity.Customer;
 import com.qt.e_invoice.repository.CustomerRepository;
+import com.qt.e_invoice.utils.JWTUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.AuthenticationException;
@@ -14,7 +17,7 @@ import org.springframework.stereotype.Service;
 public class CustomerService {
 
     @Autowired
-    private CustomerRepository usersRepo;
+    private CustomerRepository customersRepo;
 
     @Autowired
     private JWTUtils jwtUtils;
@@ -25,45 +28,43 @@ public class CustomerService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-    public ReqRes register(ReqRes registrationRequest){
-        ReqRes resp = new ReqRes();
+    public CustomerDto register(CustomerDto registrationRequest) {
+        CustomerDto resp = new CustomerDto();
         try {
-            Customer ourUser = new Customer();
-            ourUser.setEmail(registrationRequest.getEmail());
-            ourUser.setName(registrationRequest.getName());
-            ourUser.setPhoneNumber(registrationRequest.getPhoneNumber());
-            ourUser.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
-            Customer ourUsersResult = usersRepo.save(ourUser);
+            Customer newCustomer = new Customer();
+            newCustomer.setEmail(registrationRequest.getEmail());
+            newCustomer.setName(registrationRequest.getName());
+            newCustomer.setPhoneNumber(registrationRequest.getPhoneNumber());
+            newCustomer.setPassword(passwordEncoder.encode(registrationRequest.getPassword()));
+            Customer savedCustomer = customersRepo.save(newCustomer);
 
-            if (ourUsersResult.getId() > 0) {
-                resp.setCustomer(ourUsersResult);
-                resp.setMessage("User Saved Successfully");
-                resp.setStatusCode(201);
-            } else {
-                throw new RuntimeException("User registration failed");
+            if (savedCustomer.getId() > 0) {
+                resp.setCustomer(savedCustomer);
+                resp.setMessage("Customer Saved Successfully");
+                resp.setStatusCode(HttpStatus.CREATED);
             }
         } catch (Exception e) {
-            throw new RuntimeException("User registration failed: " + e.getMessage());
+            resp.setStatusCode(HttpStatus.BAD_REQUEST);
+            resp.setMessage("Error creating customer " + e.getLocalizedMessage());
         }
         return resp;
     }
 
-
-    public ReqRes login(ReqRes loginRequest){
-        ReqRes response = new ReqRes();
+    public CustomerDto login(CustomerDto customerDto) {
+        CustomerDto response = new CustomerDto();
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    loginRequest.getEmail(), loginRequest.getPassword()));
-            var user = usersRepo.findByEmail(loginRequest.getEmail()).orElseThrow();
-            var jwt = jwtUtils.generateToken(user);
+                    customerDto.getEmail(), customerDto.getPassword()));
+            var customer = customersRepo.findByEmail(customerDto.getEmail()).orElseThrow();
+            var jwt = jwtUtils.generateToken(customer);
 
-            response.setStatusCode(200);
+            response.setStatusCode(HttpStatus.OK);
             response.setToken(jwt);
             response.setExpirationTime("24Hrs");
             response.setMessage("Successfully Logged In");
         } catch (AuthenticationException e) {
-            throw new RuntimeException("Bad credentials");
+            response.setStatusCode(HttpStatus.UNAUTHORIZED);
+            response.setMessage("Invalid Credentials");
         }
         return response;
     }

@@ -1,5 +1,7 @@
 package com.qt.e_invoice.dto;
 
+import org.springframework.http.HttpStatus;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.qt.e_invoice.entity.Customer;
@@ -9,10 +11,9 @@ import lombok.Data;
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ReqRes {
+public class CustomerDto {
 
-    private int statusCode;
-    private String error;
+    private HttpStatus statusCode;
     private String message;
     private String token;
     private String expirationTime;
