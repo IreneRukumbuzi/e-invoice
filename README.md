@@ -3,6 +3,10 @@
 ## Overview
 The E-invoice Application is a Spring Boot Application designed to manage users and invoices. The application allows users to sign up, log in, and be able to create, view, edit and delete their invoices.
 
+## Swagger Documentation
+
+- `http://localhost:8080/swagger-ui/index.html#/`
+
 ## Features
 - **User Registration**: Allows new users to create an account.
 - **User Login**: Enables existing users to log in to the application.
@@ -52,7 +56,7 @@ The E-invoice Application is a Spring Boot Application designed to manage users 
 ## Usage
 1. Open Postman or insomnia and Add the baseurl in the env `http://localhost:8080`.
 2. To access the auth endpoints, add ```/auth/register``` for signup and ```/auth/login``` for login
-3. To access the invoices endpoints, add ```/invoices```, use these methods: ```GET``` to get all, ```POST``` to create an invoice, ```DELETE``` to delete an invoice and ```PUT``` to update, remember to provide the token in the Authorization paramater like this: ```bearer ${token}```
+3. To access the invoices endpoints, add ```/invoices```, use these methods: ```GET``` to get all, ```POST``` to create an invoice, ```DELETE``` to delete an invoice and ```PATCH``` to update, remember to provide the token in the Authorization paramater like this: ```bearer ${token}```
 
 
 ### Database Schema
